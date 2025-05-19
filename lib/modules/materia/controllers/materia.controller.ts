@@ -26,4 +26,59 @@ export class MateriaController {
             });
         });
     }
+
+    obtenerMaterias = (req: Request, res: Response) => {
+        Materia.find()
+        .then(materias => {
+            res.statu(200).json({
+                ok: true,
+                materias: materias
+            });
+        })
+        .catch(error => {
+            res.status(400).json({
+                ok: false,
+                error
+            });
+
+        });
+    }
+
+    actualizarMateria = (req: Request, res: Response) => {
+        Materia.findByIdAndUpdate(req.params.id, {
+            materia: req.body.materia
+        })
+        .then(materiaActualizada => {
+            res.status(200).json({
+                ok: true,
+                materia: materiaActualizada,
+                message: 'Materia actualizada'                
+            })
+        })
+        .catch(error => {
+            res.status(400).json({
+                ok: false,
+                error,
+                message: 'Materia no actualizada'
+            });
+        });
+
+    }
+
+    eliminarMateria = (req: Request, res: Response) => {
+        Materia.findByIdAndDelete(req.params.id)
+        .then(materiaEliminada => {
+            res.status(200).json({
+                ok: true,
+                message: 'Materia eliminada'
+            })
+        })
+        .catch(error => {
+            res.status(400).json({
+                ok: false,
+                error: error,
+                message: 'Materia no eliminada'
+            })
+        });
+    }
 }
