@@ -1,6 +1,6 @@
 import { MateriaController } from "../controllers/materia.controller";
 
-export class materiaRoutes {
+export class MateriaRoutes {
     private materiaController: MateriaController = new MateriaController();
 
     public routes(app): void {
